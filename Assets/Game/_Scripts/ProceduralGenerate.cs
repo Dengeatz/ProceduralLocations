@@ -51,8 +51,43 @@ public class ProceduralGenerate : MonoBehaviour
         {
             foreach(var room in generatedRooms)
             {
+                bool isDeleted = false;
+                foreach (var r in _rooms)
+                {
+                    if (room.GetComponent<Renderer>().bounds.Intersects(r.Item2.GetComponent<Renderer>().bounds))
+                    {
+                        room.ClearAllConnectors();
+                        Debug.Log("Destroyed" + room.transform.position);
+                        Destroy(room.gameObject);
+                        isDeleted = true;
+                        break;
+                    }
+                }
+                
+                if (isDeleted)
+                    continue;
+
+                foreach (var r in generatedRooms)
+                {
+                    if (r.Equals(room))
+                        continue;
+
+                    if (room.GetComponent<Renderer>().bounds.Intersects(r.GetComponent<Renderer>().bounds))
+                    {
+                        room.ClearAllConnectors();
+                        Debug.Log("Destroyed" + room.transform.position);
+                        Destroy(room.gameObject);
+                        isDeleted = true;
+                        break;
+                    }
+                }
+
+                if (isDeleted)
+                    continue;
+
                 _activeRooms.Add((room.GetRoomType(), room));
                 _rooms.Add((room.GetRoomType(), room));
+                
             }
         }
         if(needToRemove.Count > 0)

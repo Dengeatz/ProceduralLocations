@@ -19,4 +19,14 @@ public class Connector : MonoBehaviour
         this.ConnectedConnector = connector;
         connector.ConnectedConnector = this;
     }
+
+    public void RemoveConnect()
+    {
+        if (IsFree) return;
+
+        IsFree = true;
+        ConnectedConnector.IsFree = true;
+        ConnectedConnector.ConnectedConnector = null;
+        ConnectedConnector = null;
+    }
 }

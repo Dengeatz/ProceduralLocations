@@ -27,4 +27,8 @@ public class NoneExitRoom : Room
         return null;
     }
 
+    public override void ClearAllConnectors()
+    {
+        throw new System.NotImplementedException();
+    }
 }

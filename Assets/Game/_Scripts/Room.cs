@@ -8,6 +8,7 @@ public abstract class Room : MonoBehaviour
 
     public abstract List<Connector> GetFreeConnectors();
     public abstract void SetConnector(Connector connector);
+    public abstract void ClearAllConnectors();
     public abstract Connector FindFirstFreeConnector();
 
     public abstract RoomType GetRoomType();

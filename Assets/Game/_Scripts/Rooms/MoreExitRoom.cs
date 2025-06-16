@@ -30,8 +30,15 @@ public class MoreExitRoom : Room
 
         connector.ParentRoom.transform.forward = freeConnector.transform.forward;
         connector.ParentRoom.transform.position = (freeConnector.transform.position - connector.transform.position);
-
         freeConnector.SetConnect(connector);
+    }
+
+    public override void ClearAllConnectors()
+    {
+        foreach(var connector in _connectors)
+        {
+            connector.RemoveConnect();
+        }
     }
 
     public override Connector[] GetConnectors()
